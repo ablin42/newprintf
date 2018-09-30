@@ -1,0 +1,1019 @@
+==36384== Memcheck, a memory error detector
+==36384== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==36384== Using Valgrind-3.13.0 and LibVEX; rerun with -h for copyright info
+==36384== Command: ./run_tests
+==36384== Parent PID: 21853
+==36384== 
+==36384== Syscall param msg->desc.port.name points to uninitialised byte(s)
+==36384==    at 0x1003B734A: mach_msg_trap (in /usr/lib/system/libsystem_kernel.dylib)
+==36384==    by 0x1003B6796: mach_msg (in /usr/lib/system/libsystem_kernel.dylib)
+==36384==    by 0x1003B0485: task_set_special_port (in /usr/lib/system/libsystem_kernel.dylib)
+==36384==    by 0x10054C10E: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==36384==    by 0x10054C458: _libtrace_init (in /usr/lib/system/libsystem_trace.dylib)
+==36384==    by 0x1000B59DF: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==36384==    by 0x100025A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==36384==    by 0x100025C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==36384==    by 0x1000214A9: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==36384==    by 0x100021440: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, char const*, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==36384==    by 0x100020523: ImageLoader::processInitializers(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&, ImageLoader::UninitedUpwards&) (in /usr/lib/dyld)
+==36384==    by 0x1000205B8: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==36384==  Address 0x104898d6c is on thread 1's stack
+==36384==  in frame #2, created by task_set_special_port (???:)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x10054C0A6: _os_trace_create_debug_control_port (in /usr/lib/system/libsystem_trace.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   msg->desc.port.name
+   fun:mach_msg_trap
+   fun:mach_msg
+   fun:task_set_special_port
+   fun:_os_trace_create_debug_control_port
+   fun:_libtrace_init
+   fun:libSystem_initializer
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader23recursiveInitializationERKNS_11LinkContextEjPKcRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader19processInitializersERKNS_11LinkContextEjRNS_21InitializerTimingListERNS_15UninitedUpwardsE
+   fun:_ZN11ImageLoader15runInitializersERKNS_11LinkContextERNS_21InitializerTimingListE
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1005015E8: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==36384==    by 0x1002AD4D1: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B7898: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001282: conv_tests (conv_test.c:11)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1002B33C4: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_platform_memchr$VARIANT$Base
+   fun:__sfvwrite
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:conv_tests
+   fun:main
+}
+==36384== Invalid read of size 16
+==36384==    at 0x1005015C9: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==36384==    by 0x1002AD4D1: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B7898: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001A9E: conv_tests (conv_test.c:96)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384==  Address 0x100b71590 is 4 bytes after a block of size 12 alloc'd
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002B4852: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001A9E: conv_tests (conv_test.c:96)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr16
+   fun:_platform_memchr$VARIANT$Base
+   fun:__sfvwrite
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:conv_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x100009771: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A6DF: divide_unb (in ./run_tests)
+==36384==    by 0x100009794: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A730: divide_unb (in ./run_tests)
+==36384==    by 0x100009794: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A6DF: divide_unb (in ./run_tests)
+==36384==    by 0x100009911: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A730: divide_unb (in ./run_tests)
+==36384==    by 0x100009911: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A6DF: divide_unb (in ./run_tests)
+==36384==    by 0x100009953: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A730: divide_unb (in ./run_tests)
+==36384==    by 0x100009953: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_unb
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000AA47: pf_itoa_base (in ./run_tests)
+==36384==    by 0x1000099BC: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:pf_itoa_base
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000A9E7: divide_nb_ubase (in ./run_tests)
+==36384==    by 0x10000AA6E: pf_itoa_base (in ./run_tests)
+==36384==    by 0x1000099BC: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:divide_nb_ubase
+   fun:pf_itoa_base
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000AAC2: pf_itoa_base (in ./run_tests)
+==36384==    by 0x1000099BC: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:pf_itoa_base
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Use of uninitialised value of size 8
+==36384==    at 0x10000AAD5: pf_itoa_base (in ./run_tests)
+==36384==    by 0x1000099BC: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100005210: width_tests (width_test.c:125)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Value8
+   fun:pf_itoa_base
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1002B7E46: __ultoa (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100005258: width_tests (width_test.c:126)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__ultoa
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:width_tests
+   fun:main
+}
+==36384== Syscall param write(buf) points to uninitialised byte(s)
+==36384==    at 0x1003BF47E: write$NOCANCEL (in /usr/lib/system/libsystem_kernel.dylib)
+==36384==    by 0x1002B2200: _swrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002AAD26: __sflush (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002AD584: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B7952: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100005268: width_tests (width_test.c:126)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Address 0x100b6a2ca is 26 bytes inside a block of size 4,096 alloc'd
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002ADFD8: __smakebuf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002C2B1D: __swsetup (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD1BE: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001265: conv_tests (conv_test.c:10)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x100004564: width_tests (width_test.c:18)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Param
+   write(buf)
+   fun:write$NOCANCEL
+   fun:_swrite
+   fun:__sflush
+   fun:__sfvwrite
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:width_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10050163D: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==36384==    by 0x1002AD4D1: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B7898: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100005552: width_tests (width_test.c:153)
+==36384==    by 0x1000011F8: main (main.c:20)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1002B33C4: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:_platform_memchr$VARIANT$Base
+   fun:__sfvwrite
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:width_tests
+   fun:main
+}
+==36384== Invalid read of size 16
+==36384==    at 0x1005015C5: _platform_memchr$VARIANT$Base (in /usr/lib/system/libsystem_platform.dylib)
+==36384==    by 0x1002AD4D1: __sfvwrite (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B7898: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100003992: preci_tests (preci_test.c:27)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Address 0x100b9eec0 is 16 bytes before a block of size 5 alloc'd
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002B4852: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100003992: preci_tests (preci_test.c:27)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Addr16
+   fun:_platform_memchr$VARIANT$Base
+   fun:__sfvwrite
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1000097CD: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100004349: preci_tests (preci_test.c:108)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x10000999F: hex_handler (in ./run_tests)
+==36384==    by 0x10000770B: get_handler (in ./run_tests)
+==36384==    by 0x1000079A4: cycle_arg (in ./run_tests)
+==36384==    by 0x100007BEE: ft_printf (in ./run_tests)
+==36384==    by 0x100004349: preci_tests (preci_test.c:108)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:hex_handler
+   fun:get_handler
+   fun:cycle_arg
+   fun:ft_printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1002B5601: __vfprintf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x10000438E: preci_tests (preci_test.c:109)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__vfprintf
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1002B7E87: __ultoa (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x10000438E: preci_tests (preci_test.c:109)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__ultoa
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1002B7E98: __ultoa (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x10000438E: preci_tests (preci_test.c:109)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__ultoa
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:preci_tests
+   fun:main
+}
+==36384== Conditional jump or move depends on uninitialised value(s)
+==36384==    at 0x1002B7F03: __ultoa (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002DD422: __v2printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B333D: vfprintf_l (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002B1247: printf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x10000438E: preci_tests (preci_test.c:109)
+==36384==    by 0x1000011FD: main (main.c:21)
+==36384==  Uninitialised value was created by a stack allocation
+==36384==    at 0x1000037B4: preci_tests (preci_test.c:6)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   fun:__ultoa
+   fun:__v2printf
+   fun:vfprintf_l
+   fun:printf
+   fun:preci_tests
+   fun:main
+}
+==36384== 
+==36384== HEAP SUMMARY:
+==36384==     in use at exit: 117,425 bytes in 174 blocks
+==36384==   total heap usage: 3,771 allocs, 3,597 frees, 205,504 bytes allocated
+==36384== 
+==36384== 20 bytes in 1 blocks are still reachable in loss record 3 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A170A: __part_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A21F0: __numeric_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__part_load_locale
+   fun:__numeric_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 24 bytes in 1 blocks are still reachable in loss record 4 of 54
+==36384==    at 0x1000A6CC6: malloc_zone_malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2887: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384==    by 0x1005C0072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1001A168D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc_zone_malloc
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+   fun:_objc_init
+   fun:_os_object_init
+}
+==36384== 30 bytes in 1 blocks are still reachable in loss record 9 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A170A: __part_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A1986: __messages_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__part_load_locale
+   fun:__messages_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 32 bytes in 1 blocks are still reachable in loss record 10 of 54
+==36384==    at 0x1000A6CC6: malloc_zone_malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2A24: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C29F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C28CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc_zone_malloc
+   fun:NXCreateHashTableFromZone
+   fun:NXCreateHashTable
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+}
+==36384== 32 bytes in 1 blocks are still reachable in loss record 11 of 54
+==36384==    at 0x1000A6CC6: malloc_zone_malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2A45: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C29F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C28CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc_zone_malloc
+   fun:NXCreateHashTableFromZone
+   fun:NXCreateHashTable
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+}
+==36384== 32 bytes in 1 blocks are still reachable in loss record 12 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2B09: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C29F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C28CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:NXCreateHashTableFromZone
+   fun:NXCreateHashTable
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+}
+==36384== 32 bytes in 1 blocks are still reachable in loss record 13 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2934: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384==    by 0x1005C0072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1001A168D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+   fun:_objc_init
+   fun:_os_object_init
+}
+==36384== 46 bytes in 1 blocks are still reachable in loss record 17 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A170A: __part_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A1C89: __monetary_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__part_load_locale
+   fun:__monetary_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 48 bytes in 1 blocks are still reachable in loss record 18 of 54
+==36384==    at 0x1000A7275: malloc_zone_calloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C2EDB: _NXHashRehashToCapacity (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2E65: NXHashInsert (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2B33: NXCreateHashTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C29F4: NXCreateHashTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C28CE: NXCreateMapTableFromZone (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C2859: NXCreateMapTable (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C132D: __sel_registerName(char const*, int, int) (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C102E: sel_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005C09B5: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc_zone_calloc
+   fun:_NXHashRehashToCapacity
+   fun:NXHashInsert
+   fun:NXCreateHashTableFromZone
+   fun:NXCreateHashTable
+   fun:NXCreateMapTableFromZone
+   fun:NXCreateMapTable
+   fun:_ZL18__sel_registerNamePKcii
+   fun:sel_init
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+}
+==36384== 48 bytes in 1 blocks are still reachable in loss record 20 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A2193: __numeric_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__numeric_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 56 bytes in 1 blocks are still reachable in loss record 23 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A1929: __messages_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__messages_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 72 bytes in 3 blocks are possibly lost in loss record 31 of 54
+==36384==    at 0x1000A70B2: calloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1005C0832: map_images_nolock (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1005D3D6A: map_images (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x10001503B: dyld::notifyBatchPartial(dyld_image_states, bool, char const* (*)(dyld_image_states, unsigned int, dyld_image_info const*), bool, bool) (in /usr/lib/dyld)
+==36384==    by 0x100015255: dyld::registerObjCNotifiers(void (*)(unsigned int, char const* const*, mach_header const* const*), void (*)(char const*, mach_header const*), void (*)(char const*, mach_header const*)) (in /usr/lib/dyld)
+==36384==    by 0x10020E00A: _dyld_objc_notify_register (in /usr/lib/system/libdyld.dylib)
+==36384==    by 0x1005C0072: _objc_init (in /usr/lib/libobjc.A.dylib)
+==36384==    by 0x1001A168D: _os_object_init (in /usr/lib/system/libdispatch.dylib)
+==36384==    by 0x1001A163A: libdispatch_init (in /usr/lib/system/libdispatch.dylib)
+==36384==    by 0x1000B59D5: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==36384==    by 0x100025A1A: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==36384==    by 0x100025C1D: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: possible
+   fun:calloc
+   fun:map_images_nolock
+   fun:map_images
+   fun:_ZN4dyldL18notifyBatchPartialE17dyld_image_statesbPFPKcS0_jPK15dyld_image_infoEbb
+   fun:_ZN4dyld21registerObjCNotifiersEPFvjPKPKcPKPK11mach_headerEPFvS1_S6_ESC_
+   fun:_dyld_objc_notify_register
+   fun:_objc_init
+   fun:_os_object_init
+   fun:libdispatch_init
+   fun:libSystem_initializer
+   fun:_ZN16ImageLoaderMachO18doModInitFunctionsERKN11ImageLoader11LinkContextE
+   fun:_ZN16ImageLoaderMachO16doInitializationERKN11ImageLoader11LinkContextE
+}
+==36384== 192 bytes in 1 blocks are still reachable in loss record 36 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A1C2C: __monetary_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__monetary_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 231 bytes in 1 blocks are still reachable in loss record 38 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A4051: currentlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:currentlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 389 bytes in 1 blocks are still reachable in loss record 44 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002A170A: __part_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002C9130: __time_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__part_load_locale
+   fun:__time_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 488 bytes in 1 blocks are still reachable in loss record 45 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002C90D3: __time_load_locale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__time_load_locale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 2,160 bytes in 1 blocks are still reachable in loss record 49 of 54
+==36384==    at 0x1000A6A46: malloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x10029F501: __collate_load_tables (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   fun:__collate_load_tables
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== 91,556 bytes in 1 blocks are still reachable in loss record 54 of 54
+==36384==    at 0x1000A73FC: realloc (in /Users/ablin/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==36384==    by 0x1002D19EC: reallocf (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002D5DA0: _Read_RuneMagi (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4599: __setrunelocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4AAC: __wrap_setrunelocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A4222: loadlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x1002A3F18: setlocale (in /usr/lib/system/libsystem_c.dylib)
+==36384==    by 0x100001B6E: conv_tests (conv_test.c:104)
+==36384==    by 0x1000011F3: main (main.c:19)
+==36384== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:reallocf
+   fun:_Read_RuneMagi
+   fun:__setrunelocale
+   fun:__wrap_setrunelocale
+   fun:loadlocale
+   fun:setlocale
+   fun:conv_tests
+   fun:main
+}
+==36384== LEAK SUMMARY:
+==36384==    definitely lost: 0 bytes in 0 blocks
+==36384==    indirectly lost: 0 bytes in 0 blocks
+==36384==      possibly lost: 72 bytes in 3 blocks
+==36384==    still reachable: 95,416 bytes in 17 blocks
+==36384==         suppressed: 21,937 bytes in 154 blocks
+==36384== 
+==36384== For counts of detected and suppressed errors, rerun with: -v
+==36384== ERROR SUMMARY: 1822 errors from 25 contexts (suppressed: 12 from 12)
