@@ -6,7 +6,7 @@
 /*   By: ablin <ablin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 02:36:14 by ablin             #+#    #+#             */
-/*   Updated: 2018/08/25 21:33:44 by ablin            ###   ########.fr       */
+/*   Updated: 2018/09/30 23:21:03 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,13 @@
 ** differentiate the call from add_arg and fetch_arg
 */
 
-int		handle_exc(char *twflag, char *wflag, char flag, int mode)
+int		pf_handle_exc(char *twflag, char *wflag, char flag)
 {
-	if (mode == 1)
-	{
-		if (ft_strcmp(twflag, "NOFLAG") == 0 && (flag == 'C' ||
-		(flag == 'c' && is_there(wflag, 'l')) || flag == 'S' ||
-		(flag == 's' && is_there(wflag, 'l'))))
-			return (1);
-	}
-	else if (mode == 2)
-	{
-		if (((flag == ' ' || flag == '#' || flag == '*' ||
-		flag == '+' || flag == '-' || flag == '.' || flag == 'l' ||
-		flag == 'j' || flag == 'h' || flag == 'z') ||
-		(flag >= '0' && flag <= '9')) && flag != '\0')
-			return (1);
-	}
+	if (((flag == ' ' || flag == '#' || flag == '*' ||
+	flag == '+' || flag == '-' || flag == '.' || flag == 'l' ||
+	flag == 'j' || flag == 'h' || flag == 'z') ||
+	(flag >= '0' && flag <= '9')) && flag != '\0')
+		return (1);
 	return (0);
 }
 
@@ -45,7 +35,7 @@ int		pf_parse_mod(char *buf, t_arg lst, char *format, va_list ap)
 	i = 0;
 	retour = 0;
 	lst.mod = 0;
-	while (format[i] != '\0' && format[i] != 'h' && format[i] != 'l' 
+	while (format[i] != '\0' && format[i] != 'h' && format[i] != 'l'
 	&& format[i] != 'j' && format[i] != 'z')
 		i++;
 	if (format[i] == 'h')
@@ -68,39 +58,51 @@ int		pf_parse_mod(char *buf, t_arg lst, char *format, va_list ap)
 	return (retour);
 }
 
-int		pf_parse_arg(char *buf, char *format, va_list ap)
+void	pf_parse_arg(t_arg *lst, char *buf, char *format, va_list ap)
 {
-	t_arg	lst;
 	int		i;
 
 	i = 0;
+	while (pf_handle_exc(NULL, NULL, format[i]))
+	{
+		if (format[i] == '#')
+			(*lst).htag = 1;
+		if ((i == 0 && format[i] == '0')
+		|| (i > 0 && format[i - 1] < 1 && format[i - 1] > 9))
+			(*lst).ztag = 1;
+		if (format[i] == '-')
+			(*lst).mtag = 1;
+		if (format[i] == '+')
+			(*lst).ptag = 1;
+		if (format[i] == ' ')
+			(*lst).stag = 1;
+		if (format[i] == '.')
+			(*lst).ispreci = 1;
+		i++;
+	}
+	(*lst).flag = format[i];
+	if ((*lst).flag == 'x' || (*lst).flag == 'X' || (*lst).flag == 'p')
+		(*lst).base = 16;
+	if ((*lst).flag == 'o' || (*lst).flag == 'O')
+		(*lst).base = 8;
+	(*lst).preci = pf_get_preci(format, i);
+	(*lst).width = pf_get_pad(format, i);
+}
+
+int		pf_set_arg(char *buf, char *format, va_list ap)
+{
+	t_arg	lst;
+
 	lst.htag = 0;
 	lst.ztag = 0;
 	lst.mtag = 0;
 	lst.ptag = 0;
 	lst.stag = 0;
+	lst.ispreci = 0;
+	lst.preci = 0;
+	lst.width = 0;
 	lst.base = 10;
-	while (handle_exc(NULL, NULL, format[i], 2))
-	{
-		if (format[i] == '#')
-			lst.htag = 1;
-		if (format[i] == '0')
-			lst.ztag = 1;
-		if (format[i] == '-')
-			lst.mtag = 1;
-		if (format[i] == '+')
-			lst.ptag = 1;
-		if (format[i] == ' ')
-			lst.stag = 1;
-		i++;
-	}
-	lst.flag = format[i];
-	if (lst.flag == 'x' || lst.flag == 'X' || lst.flag == 'p')
-		lst.base = 16;
-	if (lst.flag == 'o' || lst.flag == 'O')
-		lst.base = 8;
-	lst.preci = pf_get_preci(format, i);
-	lst.width = pf_get_pad(format, i);
+	pf_parse_arg(&lst, buf, format, ap);
 	return (pf_parse_mod(buf, lst, format, ap));
 }
 
@@ -120,7 +122,7 @@ int		pf_add_str_to_buf(char *buf, char *str)
 ** to place them in a list
 */
 
-void	pf_cycle_format(t_arg **lst, char *format, va_list ap)
+int		pf_cycle_format(t_arg **lst, char *format, va_list ap)
 {
 	char	*str;
 	char	buf[BUFF_SIZE];
@@ -135,8 +137,8 @@ void	pf_cycle_format(t_arg **lst, char *format, va_list ap)
 		if (*str == '%')
 		{
 			str++;
-			retour += pf_parse_arg(buf, str, ap);
-			while (handle_exc(NULL, NULL, *str, 2))
+			retour += pf_set_arg(buf, str, ap);
+			while (pf_handle_exc(NULL, NULL, *str))
 				str++;
 			str++;
 		}
@@ -148,4 +150,5 @@ void	pf_cycle_format(t_arg **lst, char *format, va_list ap)
 		}
 	}
 	ft_putstr(buf);
+	return (retour);
 }

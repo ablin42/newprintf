@@ -1,9 +1,8 @@
 SRC_NAME = ft_printf.c fill_list.c utils.c char_handler.c utils2.c \
-wide_char_handler.c length_handler.c
-LIB_SRC_NAME = pf_itoa_base.c ft_putchar.c ft_putstr.c ft_putwstr.c \
-ft_putwchar.c ft_strchr.c ft_strcmp.c pf_strdup.c ft_strlen.c ft_strstr.c \
-ft_strsub.c ft_strtoupper.c ft_toupper.c ft_strcpy.c ft_strncat.c ft_strcat.c \
-ft_memset.c
+wide_char_handler.c length_handler.c padding.c nb_handler.c
+LIB_SRC_NAME = ft_putchar.c ft_putstr.c ft_putwstr.c ft_putwchar.c ft_strchr.c \
+ft_strcmp.c ft_strlen.c ft_strstr.c ft_strsub.c ft_strtoupper.c ft_toupper.c \
+ft_strcpy.c ft_strncat.c ft_strcat.c ft_memset.c
 SRC_PATH = src/
 LIB_SRC_PATH = src/lib/
 OBJ_PATH = obj/

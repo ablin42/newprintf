@@ -6,7 +6,7 @@
 /*   By: ablin <ablin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 02:40:33 by ablin             #+#    #+#             */
-/*   Updated: 2018/08/22 02:19:52 by ablin            ###   ########.fr       */
+/*   Updated: 2018/09/30 20:58:07 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	pf_print_wchar(char *buf, t_arg lst, int *r, va_list ap)
 	wchar_t		c;
 
 	c = va_arg(ap, wchar_t);
-	ret = wchar_len(c);
+	ret = pf_wchar_len(c);
 	if (ret == -1 || (c >= 55296 && c <= 57343) || c < 0 || c > 0x10FFFF)
 	{
 		*r = -1;
@@ -58,20 +58,19 @@ int		pf_putwstr_preci(wchar_t *str, t_arg lst, int (*func)(wchar_t))
 
 	i = 0;
 	ret = 0;
-	if ((str == NULL || str == 0) && lst.preci == 0)//!is_there(wflag, '.'))
+	if ((str == NULL || str == 0) && lst.ispreci == 0)
 	{
 		if (func == ft_putwchar)
-			ft_putstr("(null)");
+			ft_putstr("(null)");//ft_putstr
 		return (6);
 	}
 	while (str != NULL && str[i] != '\0')
 	{
-		if ((wchar_len(str[i]) == -1 || (str[i] >= 55296 && str[i] <= 57343)
+		if ((pf_wchar_len(str[i]) == -1 || (str[i] >= 55296 && str[i] <= 57343)
 		|| str[i] < 0) || str[i] > 0x10FFFF)
 			return (-1);
-		//if (!is_there(wflag, '.') || (is_there(wflag, '.') &&
-		//ret + wchar_len(str[i]) <= get_preci(wflag)))
-		if ((lst.preci == 0) || (lst.preci != 0 && ret + wchar_len(str[i]) <= lst.preci))
+		if (lst.ispreci == 0
+		|| (lst.ispreci == 1 && ret + pf_wchar_len(str[i]) <= lst.preci))
 			ret += func(str[i]);
 		if (ret == lst.preci)
 			break ;
@@ -91,7 +90,7 @@ void	pf_print_wstr(char *buf, t_arg lst, int *r, va_list ap)
 	wchar_t		*s;
 
 	s = va_arg(ap, wchar_t *);
-	ret = pf_putwstr_preci(s, lst, wchar_len);
+	ret = pf_putwstr_preci(s, lst, pf_wchar_len);
 	if (ret == -1)
 	{
 		*r = -1;

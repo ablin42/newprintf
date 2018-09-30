@@ -6,7 +6,7 @@
 /*   By: ablin <ablin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 02:23:02 by ablin             #+#    #+#             */
-/*   Updated: 2018/09/02 20:40:07 by ablin            ###   ########.fr       */
+/*   Updated: 2018/09/30 23:04:24 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ int		main()
 //	ub_tests();
 //	random_tests();
 
-ft_printf("%0+#- 6.3c / %05c", '4', '3');
-printf("\n%0+#- 6.3c / %05c", '4', '3');
+
+printf(" %d\n", ft_printf("%#08x", 42));
+printf(" %d\n\n", printf("%#08x", 42));
+
+printf(" %d\n", ft_printf("%10X", 42));
+printf(" %d\n\n", printf("%10X", 42));
 
 	return (0);
 }

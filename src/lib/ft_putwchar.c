@@ -6,7 +6,7 @@
 /*   By: ablin <ablin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/09 02:49:38 by ablin             #+#    #+#             */
-/*   Updated: 2018/08/27 18:44:11 by ablin            ###   ########.fr       */
+/*   Updated: 2018/09/30 20:17:28 by ablin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ int		ft_putwchar(wchar_t c)
 		ft_putchar(((c >> 6) & 0x3F) | 0x80);
 		ft_putchar((c & 0x3F) | 0x80);
 	}
-	return (wchar_len(c));
+	return (pf_wchar_len(c));
 }
